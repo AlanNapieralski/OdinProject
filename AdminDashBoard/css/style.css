@@ -10,15 +10,21 @@ h1, h2 {
     font-weight: bold;
 }
 
+.wrapper {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+}
+
 .sidebar {
     display: grid;
+    grid-template-rows: repeat(10, 1fr);
     justify-content: start;
     align-items: start;
     text-decoration: none;
     padding: 15px;
     row-gap: 30px;
     background-color: #1992D4;
-    width: 300px;
+    width: 250px;
     height: 100vh;
 }
 
@@ -48,4 +54,42 @@ nav .iconTitle svg {
 .sidebar-nav {
     display: grid;
     row-gap: 30px;
+}
+
+/* main */
+
+.main {
+    background-color: beige;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.profile {
+    width: 60px;
+    height: 60px;
+    background-color: blue;
+    border-radius: 50px;
+}
+
+.main > .topnav-left {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    justify-content: start;
+}
+.main > .topnav-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: start;
+    justify-content: end;
+}
+
+.main svg {
+    width: var(--iconSize);
+    height: var(--iconSize);
+    transform: scale(0.5);
+}
+
+.topnav-left > input {
+    height: 30px;
 }
