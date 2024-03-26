@@ -1,0 +1,51 @@
+:root {
+    --iconSize: 40px;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+.sidebar {
+    display: grid;
+    justify-content: start;
+    align-items: start;
+    text-decoration: none;
+    padding: 15px;
+    row-gap: 30px;
+    background-color: #1992D4;
+    width: 300px;
+    height: 100vh;
+}
+
+.iconTitle {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    column-gap: 10px;
+    color: white;
+}
+
+.sidebar > .iconTitle svg {
+    width: var(--iconSize);
+    height: var(--iconSize);
+}
+
+.sidebar svg {
+    fill: white;
+}
+
+nav .iconTitle svg {
+    width: var(--iconSize);
+    height: var(--iconSize);
+    transform: scale(0.5);
+}
+
+.sidebar-nav {
+    display: grid;
+    row-gap: 30px;
+}
