@@ -2,8 +2,14 @@
     --iconSize: 40px;
 }
 
-body {
-    font-family: sans-serif;
+@font-face {
+    font-family: 'Roboto';
+    src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;  
+    overflow: hidden;
 }
 
 h1, h2 {
@@ -61,6 +67,7 @@ nav .iconTitle svg {
 .main {
     display: grid;
     grid-template-rows: min-content 1fr;
+    background-color: #E2E8F0;
 }
 
 .header {
@@ -178,5 +185,124 @@ nav .iconTitle svg {
 /* dashboard */
 
 .dashboard {
-    background-color: #E2E8F0;;
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    margin: 20px 20px;
+    column-gap: 20px;
+    margin-bottom: 80px;
+}
+
+.dashboard .left {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+}
+
+.dashboard .left > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.dashboard .left > div p:first-child {
+    font-weight: bold;
+}
+
+.dashboard .left > div p:last-child {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    word-wrap: break-word;
+    max-height: 5em; /* Set maximum height based on line height */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.dashboard h3 {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.projectBox {
+    background-color: white;
+    border: 0 solid inherit;
+    border-left: 5px solid #EFAE19;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 15px;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    max-height: 150px;
+    justify-content: space-between;
+}
+
+.projectBox > div:first-child p {
+    margin-bottom: 8px;
+}
+
+.dashboard .right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 20px;
+}
+
+.dashboard .right > div {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+}
+
+#card {
+    background-color: white;
+    border: 0 solid inherit;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
+
+.interactiveIcons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.interactiveIcons svg {
+    width: var(--iconSize);
+    height: var(--iconSize);
+    transform: scale(0.7);
+}
+
+.announcement .entry p:first-of-type {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.announcement .entry p:last-of-type {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+#card hr {
+    margin: 10px 0;
+    opacity: 0.3;
+}
+
+.trending .entry {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.trending .entry svg {
+    margin-right: 10px;
+}
+
+.trending .entry div p:first-of-type {
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+}
+
+.trending .entry div p:last-of-type {
+    font-size: 0.8rem;
+    opacity: 0.7;
 }
