@@ -24,18 +24,27 @@ function createPlayer (playerNumber) {
 };
 
 const gameboard = (function () {
-    let board = Array(9).fill(""); // Initialize the board with empty strings
+    let board = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
 
     const getBoard = () => board;
 
-    const fillSquare = (squareNum, input) => board[squareNum] = input;
+    const fillSquare = (squareNum, input) =>  {
+        const [x, y] = squareNum.split('');
+        console.log(`x: ${x}, y: ${y}`);
 
-    const printBoard = () => {
-        for (let i = 0; i < 9; i += 3) {
-            console.log(board.slice(i, i + 3).join(' | '));
-            if (i < 6) console.log('---------');
+        board[x][y] = input;
+    }
+
+    function printBoard() {
+        for (let row of board) {
+            console.log(row.join(' | ')); // Join each element in the row with ' | '
+            console.log('---------'); // Separator between rows
         }
-    };
+    }
 
     return { getBoard, fillSquare, printBoard };
 })();
@@ -72,17 +81,53 @@ const game = (function () {
             if (!gameOver()) {
                 switchPlayerTurn();
                 playRound();
-            } else {
-                console.log("Game Over! Draw")
+            } else if (win()) {
+                
             }
         });
     }
+    
+    const gameOver = () => draw() || win();
 
-    const gameOver = () => {
-        for (let i = 0; i < board.length; i++) {
-            if (board[i] === "") return false;
+    const draw = () => {
+        const emptyCells = board.filter(row => 
+            row.some(element => element === '')
+        );
+
+        // true if there's no empty rows i.e it's a draw
+        return emptyCells.length === 0 ? true : false;
+    }
+
+    const win = () => {
+        const checkHorizontalMatch = () => board.some(row => row.every(element => element === row[0] && row[0] !== ''));
+        
+        const checkVerticalMatch = () => {
+            for (let i = 0; i < 3; i++) {
+                const verticalLine = [];
+                for (let y = 0; y < 3; y++) {
+                    verticalLine.push(board[y][i]);
+                }
+                if (verticalLine.every(element => element === verticalLine[0] && verticalLine[0] !== '')) return true;
+            }
+            return false;
         }
-        return true;
+
+        const checkCrossMatch = () => {
+            const mainDiagonal = [];
+            const antiDiagonal = [];
+
+            for (let i = 0; i < 3; i++) {
+                mainDiagonal.push(board[i][i]);
+                antiDiagonal.push(board[i][2-i]);
+            }
+
+            const isMainDiagonalMatch = mainDiagonal.every(cell => cell === mainDiagonal[0] && cell !== '');
+            const isAntiDiagonalMatch = antiDiagonal.every(cell => cell === antiDiagonal[0] && cell !== '');
+
+            return isMainDiagonalMatch || isAntiDiagonalMatch;
+        }
+
+        return checkHorizontalMatch() || checkVerticalMatch() || checkCrossMatch();
     }
 
 
