@@ -1,9 +1,17 @@
 body {
     display: grid;
+    grid-template-rows: min-content 1fr;
     height: 100vh;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     overflow: hidden;
+}
+
+h1 {
+    justify-self: center;
+    font-family: cursive;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .board {
@@ -24,9 +32,9 @@ body {
     position: relative;
     display: block;
     transform: scale(var(--ggs,1));
-    width: 50px;
-    height: 50px;
-    border: 3px solid;
+    width: 70px;
+    height: 70px;
+    border: 5px solid;
     border-radius: 100px
 }
 
