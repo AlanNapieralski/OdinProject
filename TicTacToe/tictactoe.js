@@ -4,7 +4,7 @@ const input = {
 };
 
 const gameboard = (function () {
-    const board = [
+    let board = [
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
@@ -12,13 +12,18 @@ const gameboard = (function () {
 
     const getBoard = () => board;
 
+    const resetBoard = () => board = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
+
     const fillSquare = (cellIndex, input) =>  {
-        console.log(cellIndex);
         const {x, y} = cellIndex;
         board[x][y] = input;
     }
 
-    return { getBoard, fillSquare };
+    return { getBoard, resetBoard, fillSquare };
 })();
 
 const game = (function () {
@@ -30,6 +35,32 @@ const game = (function () {
     const cols = 3;
     const btns2D = convertTo2DArray(btns, rows, cols);
 
+    // game
+    let board = gameboard.getBoard();
+    let drawCount = 0;
+    
+    const players = [
+        playerOne = createPlayer(1),
+        playerTwo = createPlayer(2)
+    ];
+
+    const paragraph = document.getElementsByTagName("p");
+
+    const updateScoreboard = () => {
+            paragraph[0].innerText = `${players[0].getName()}'s wins: ${players[0].getCount()}`;
+            paragraph[2].innerText = `${players[1].getName()}'s wins: ${players[1].getCount()}`;
+            paragraph[1].innerText = `Draws: ${drawCount}`;
+    };
+    updateScoreboard();
+    
+
+    let activePlayer = players[0];
+
+    const switchPlayerTurn = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
+
+    // action listener
     for (let x = 0; x < btns2D.length; x++) {
         for (let y = 0; y < btns2D[x].length; y++) {
             const button = btns2D[x][y];
@@ -43,26 +74,10 @@ const game = (function () {
         }
     }
 
-    // game
-    let board = gameboard.getBoard();
-    
-    const players = [
-        playerOne = createPlayer(1),
-        playerTwo = createPlayer(2)
-    ];
-    
-    let activePlayer = players[0];
-
-    const switchPlayerTurn = () => {
-        activePlayer = activePlayer === players[0] ? players[1] : players[0];
-    }
-
     const restart = () => {
-        board = [
-            ['', '', ''],
-            ['', '', ''],
-            ['', '', '']
-        ]
+        gameboard.resetBoard();
+
+        board = gameboard.getBoard();
 
         for (let btn of btns) {
             const cell = btn.querySelector('div');
@@ -70,11 +85,9 @@ const game = (function () {
         }
 
         activePlayer = players[0];
-
     }
 
     const playRound = (indexes) => {
-        text.innerText = `${activePlayer.getName()}'s turn 🤔`
 
         gameboard.fillSquare(indexes, activePlayer.getInput());
 
@@ -82,12 +95,17 @@ const game = (function () {
 
         if (!(draw() || isWon)) {
             switchPlayerTurn();
+            text.innerText = `${activePlayer.getName()}'s turn 🤔`;
         } else if (isWon) {
-            text.innerText = `${winner.getName()} have won 😎`
+            text.innerText = `${winner.getName()} have won 😎`;
+            winner.incrementCount();
             restart();
+            updateScoreboard();
         } else if (draw()) {
-            text.innerText = `Draw 🙀`
+            text.innerText = `Draw 🙀`;
             restart();
+            drawCount++;
+            updateScoreboard();
         }
     }
     
@@ -176,6 +194,7 @@ function convertTo2DArray(arr, rows, cols) {
 function createPlayer (playerNumber) {
     const playerName = "Player " + playerNumber;
     let playerInput = "";
+    let winCount = 0;
 
     switch (playerNumber) {
         case 1:
@@ -190,5 +209,9 @@ function createPlayer (playerNumber) {
 
     const getInput = () => playerInput;
 
-    return {playerName, getName, getInput}; 
+    const incrementCount = () => winCount++;
+
+    const getCount = () => winCount;
+
+    return {playerName, getName, getInput, incrementCount, getCount}; 
 };
