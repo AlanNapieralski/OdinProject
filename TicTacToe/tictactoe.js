@@ -53,8 +53,6 @@ const game = (function () {
     
     let activePlayer = players[0];
 
-    let winner;
-
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
@@ -80,9 +78,11 @@ const game = (function () {
 
         gameboard.fillSquare(indexes, activePlayer.getInput());
 
-        if (!(draw() || win())) {
+        const {isWon, winner} = win();
+
+        if (!(draw() || isWon)) {
             switchPlayerTurn();
-        } else if (win()) {
+        } else if (isWon) {
             text.innerText = `${winner.getName()} have won 😎`
             restart();
         } else if (draw()) {
@@ -103,6 +103,8 @@ const game = (function () {
     }
 
     const win = () => {
+        let winner;
+
         const checkHorizontalMatch = () => board.some(row => {
             if (row.every(element => element === row[0] && row[0] !== '')) {
                 winner = players.filter(player => player.getInput() === row[0])[0];
@@ -150,7 +152,9 @@ const game = (function () {
             return false;
         }
 
-        return checkHorizontalMatch() || checkVerticalMatch() || checkCrossMatch();
+        isWon = checkHorizontalMatch() || checkVerticalMatch() || checkCrossMatch();
+
+        return {isWon, winner};
     }
 })();
 
