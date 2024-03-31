@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "toml": "^3.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0",
     "wepack-cli": "^0.0.1-security",
     "xml-loader": "^1.2.1",
     "yamljs": "^0.3.0"
