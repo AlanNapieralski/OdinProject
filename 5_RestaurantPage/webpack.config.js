@@ -7,6 +7,9 @@ module.exports = {
     index: './src/index.js',
   },
   devtool: 'inline-source-map', // good for illustrative purposes (though not for production)
+  devServer: {
+    static: './dist',
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),

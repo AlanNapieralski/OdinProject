@@ -1,1 +1,1 @@
-console.log("The website is runing");
+console.log("The server responds wooooow");
