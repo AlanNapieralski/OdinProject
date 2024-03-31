@@ -1,9 +1,32 @@
-import './style.css'
+import './style.css';
 import mainComponent from './main.js';
-
-const { imageContainer, description } = mainComponent();
+import menuComponent from './menu.js';
+import aboutComponent from './about.js';
 
 const content = document.querySelector('#content');
+const navButtons = document.querySelectorAll('button');
 
-content.appendChild(imageContainer);
-content.appendChild(description);
+
+for (let button of navButtons) {
+    button.addEventListener('click', () => {
+        resetContent();
+
+        switch(button.className) {
+            case 'main':
+                content.appendChild(mainComponent());
+                break;
+            case 'menu':
+                content.appendChild(menuComponent());
+                break;
+            case 'about':
+                content.appendChild(aboutComponent());
+                break;
+        }
+    });
+}
+
+const resetContent = () => {
+    while (content.firstChild) {
+        content.removeChild(content.firstChild);
+    }
+}

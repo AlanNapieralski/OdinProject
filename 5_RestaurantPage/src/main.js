@@ -1,4 +1,6 @@
 export default function mainComponent() {
+    const container = document.createElement('div');
+
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('imageContainer');
 
@@ -17,5 +19,8 @@ export default function mainComponent() {
     description.classList.add('description');
     description.innerText = "This is the best restaurant that you can find frfr trust me bro I ain't lyin'"
 
-    return {imageContainer, description};
+    container.appendChild(imageContainer);
+    container.appendChild(description);
+
+    return container;
 }
