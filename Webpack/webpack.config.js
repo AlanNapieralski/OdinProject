@@ -2,6 +2,7 @@ const path = require('path');
 const toml = require('toml');
 const yaml = require('yamljs');
 const json5 = require('json5');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -9,6 +10,15 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+        template: './dist/index.html', // using index.html as a template for the new project
+        // title: 'Weebpack 5 Video Tutorial', // set html doc title
+        // the title above is not needed as it's set by the template
+        filename: 'index2.html', // set file name (other than index.html)
+        inject: 'body', // injects the script tag (at the bottom of the body tag)
+    })
+  ],
   module: {
     rules: [
       {
