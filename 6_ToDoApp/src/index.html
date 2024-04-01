@@ -12,30 +12,68 @@
     <hr>
     <main>
         <nav class="navBar">
-            <button class="taskListBtn" id="allTasksButton"><h2>All Tasks</h2></button>
-            <div class="myProjects">
-                <h2>My Projects</h2>
-                <button class="addProject"></button>
-                <ul>
-                    <!-- to be added dynamically -->
-                    <li><button class="taskListBtn"></button></li>
-                    <li><button class="taskListBtn"></button></li>
-                    <li><button class="taskListBtn"></button></li>
-                </ul>
+            <div class="allTasks">
+                <h2>All Tasks</h2>
+                <button class="taskListBtn" id="allTasksButton"><h2>All Tasks</h2></button>
+            </div>
+            <div class="projectComponent">
+                <div class="myProjectsHeadline">
+                    <h2>My Projects</h2>
+                    <button class="addProject">+</button>
+                </div>
+                <div class="myProjects">
+                    <ul>
+                        <!-- to be added dynamically -->
+                        <li><button class="taskListBtn">Shopping List</button></li>
+                        <li><button class="taskListBtn">My personal Project</button></li>
+                        <li><button class="taskListBtn">IDK</button></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div class="content">
+            <h1>Shopping List</h1>
             <form id="todo-form">
-                <input type="text" id="todo-input" placeholder="Enter a task">
-                <button type="submit">Add</button>
+                <ul id="todo-list">
+                    <div class="checklist-item">
+                        <div class="input-wrapper">
+                            <div class="round">
+                                <input type="checkbox" checked id="checkbox1" />
+                                <label for="checkbox1"></label>
+                            </div>
+                            <input type="text" id="todo-input1" autocomplete="off" placeholder="Enter a task" class="todo-input">
+                            <input type="date" id="due-date"> 
+                            <!-- change to type text on datepicker -->
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="input-wrapper">
+                            <div class="round">
+                                <input type="checkbox" checked id="checkbox2" />
+                                <label for="checkbox2"></label>
+                            </div>
+                            <input type="text" id="todo-input2" autocomplete="off" placeholder="Enter a task" class="todo-input">
+                            <input type="date" id="due-date">
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="input-wrapper">
+                            <div class="round">
+                                <input type="checkbox" checked id="checkbox3" />
+                                <label for="checkbox3"></label>
+                            </div>
+                            <input type="text" id="todo-input3" autocomplete="off" placeholder="Enter a task" class="todo-input">
+                            <input type="date" id="due-date">
+                        </div>
+                    </div>
+                </ul>
             </form>
         </div>
-
-        <ul id="todo-list">
-            <!-- ToDo items will be dynamically added here -->
-        </ul>
     </main>
-
+    <div class="addTask">
+        <button class="addTaskButton" id="addTask">+</button>
+    </div>
+    <!-- <input type="text" id="createProject" placeholder="Enter the name of your new project"></input> -->
     <script src="app.js"></script>
 </body>
 </html>
