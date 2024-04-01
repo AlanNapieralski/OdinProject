@@ -1,0 +1,106 @@
+/* Meyerweb CSS Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, hr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('./JosefinSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('./JosefinSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'MyFont';
+    background-color: #333;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+hr {
+    height: 15px;
+    caret-color: white;
+    outline: white;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    height: auto;
+}
+
+main > .navBar {
+    background-color: #262626;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 10px;
+}
+
+.taskListBtn {
+    background-color: #00ff371e;
+    color: white;
+    font-weight: bold;
+    text-decoration-style: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+header {
+    text-align: left;
+    padding: 1em;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+main h2 {
+    font-size: 1.2rem;
+}

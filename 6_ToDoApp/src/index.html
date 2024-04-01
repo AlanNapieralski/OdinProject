@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Todoist</title>
+</head>
+<body>
+    <header>
+        <h1>Alan's Todo</h1>
+    </header>
+    <hr>
+    <main>
+        <nav class="navBar">
+            <button class="taskListBtn" id="allTasksButton"><h2>All Tasks</h2></button>
+            <div class="myProjects">
+                <h2>My Projects</h2>
+                <button class="addProject"></button>
+                <ul>
+                    <!-- to be added dynamically -->
+                    <li><button class="taskListBtn"></button></li>
+                    <li><button class="taskListBtn"></button></li>
+                    <li><button class="taskListBtn"></button></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <form id="todo-form">
+                <input type="text" id="todo-input" placeholder="Enter a task">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+
+        <ul id="todo-list">
+            <!-- ToDo items will be dynamically added here -->
+        </ul>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

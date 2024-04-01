@@ -1,5 +1,3 @@
-
-
 export default function aboutComponent() {
     const container = document.createElement('div');
 
