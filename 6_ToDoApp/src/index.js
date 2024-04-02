@@ -1,5 +1,10 @@
 import './style.css';
-import { state, stateProjects } from './state.js';
-import './nav.js';
 import './eventListeners.js';
-import './content.js';
+
+export function generateInputField(input, placeholder) {
+    input.id = 'createProject';
+    input.setAttribute('type', 'text');
+    input.setAttribute('placeholder', placeholder);
+    document.body.appendChild(input);
+    return input;
+}
