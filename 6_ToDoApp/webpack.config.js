@@ -5,6 +5,8 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
+    nav: './src/nav.js',
+    content: './src/content.js'
   },
   devtool: 'inline-source-map', // good for illustrative purposes (though not for production)
   devServer: {

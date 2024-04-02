@@ -264,10 +264,14 @@ main h2 {
 
 .input-wrapper {
     display: grid;
-    grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: min-content 1fr min-content min-content;
     gap: 1.5em;
 }
 
+.input-wrapper > p {
+    text-wrap: nowrap;
+    align-self: center;
+}
 
 .addTaskButton {
     position: absolute;
