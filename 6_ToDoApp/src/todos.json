@@ -1,21 +1,36 @@
 [
     {
-        "name": "All Tasks",
+        "name": "none",
         "tasks": [
             {
-                "desc": "make dishes",
-                "done": "false",
+                "desc": "finish project",
+                "done": false,
                 "due": "2013-12-01"
             },
             {
-                "desc": "do laundry",
-                "done": "false",
+                "desc": "send email",
+                "done": false,
                 "due": "2013-12-05"
             },
             {
-                "desc": "buy groceries",
-                "done": "false",
+                "desc": "attend meeting",
+                "done": false,
                 "due": "2013-12-10"
+            },
+            {
+                "desc": "study for exam",
+                "done": false,
+                "due": "2022-05-15"
+            },
+            {
+                "desc": "complete homework",
+                "done": false,
+                "due": "2022-05-20"
+            },
+            {
+                "desc": "attend class",
+                "done": false,
+                "due": "2022-05-25"
             }
         ]
     },
@@ -24,18 +39,38 @@
         "tasks": [
             {
                 "desc": "finish project",
-                "done": "false",
+                "done": false,
                 "due": "2013-12-01"
             },
             {
                 "desc": "send email",
-                "done": "false",
+                "done": false,
                 "due": "2013-12-05"
             },
             {
                 "desc": "attend meeting",
-                "done": "false",
+                "done": false,
                 "due": "2013-12-10"
+            }
+        ]
+    },
+    {
+        "name": "school",
+        "tasks": [
+            {
+                "desc": "study for exam",
+                "done": false,
+                "due": "2022-05-15"
+            },
+            {
+                "desc": "complete homework",
+                "done": false,
+                "due": "2022-05-20"
+            },
+            {
+                "desc": "attend class",
+                "done": false,
+                "due": "2022-05-25"
             }
         ]
     }

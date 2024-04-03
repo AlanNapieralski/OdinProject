@@ -1,7 +1,4 @@
-import todos from './todos.json';
 import { state, stateProjects } from './state.js';
-
-let projectName = '';
 
 function createProject(name) {
     return {
@@ -23,4 +20,8 @@ export function addProjectBox(projectName) {
     
     li.innerHTML = `<button class="taskListBtn">#${projectName}</button>`;
     ul.appendChild(li);
+
+    const content = document.querySelector('.content');
+    const h2 = content.querySelector('h2');
+    h2.innerHTML = `#${projectName}`;
 }

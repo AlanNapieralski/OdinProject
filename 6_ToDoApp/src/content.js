@@ -5,6 +5,11 @@ export function addTasktoJSON(desc, due) {
         const jsonProject = state.currentProject;
         const jsonProjectIndex = stateProjects.json.indexOf(jsonProject);
 
+        stateProjects.json[0].tasks.push({
+            "desc": desc,
+            "done": false,
+            "due": due
+        });
         stateProjects.json[jsonProjectIndex].tasks.push({
             "desc": desc,
             "done": false,
@@ -13,25 +18,67 @@ export function addTasktoJSON(desc, due) {
     }
 }
 
-export function addTaskToDOM(taskName) {
-    const projectID = stateProjects.json.indexOf(state.currentProject);
-    const taskID = state.currentProject.tasks.length;
-    const entryID = `${projectID}-${taskID}`;
-
-    const item = document.createElement('div');
-    item.classList.add('checklist-item');
-    item.innerHTML =    `<div class="input-wrapper">
-                            <div class="round">
-                                <input type="checkbox" id="checkbox${entryID}" />
-                                <label for="checkbox${entryID}"></label>
-                            </div>
-                            <input type="text" id="todo-input${entryID}" autocomplete="off" placeholder="Enter a task" class="todo-input">
-                            <p>Due date: </p>
-                            <input type="date" id="due-date${entryID}">
-                        </div>`;
-                        
-    document.querySelector('#todo-list').appendChild(item);
-    item.querySelector(`#todo-input${entryID}`).value = taskName;
+function readTaskFromHTML(task) {
+    
+    const desc = task.querySelector('.todo-input').value;
+    const done = task.querySelector('[type="checkbox"]').checked;
+    const due = task.querySelector('[type="date"]').value;
+    
+    return {
+        "desc": desc,
+        "done": done,
+        "due": due
+    };
 }
 
-// create a function that's auto generating the html template based on the task that's stored in json
+export function readTasks() {
+    let tasks = [];
+    const tasksHTML = document.querySelectorAll('.input-wrapper');
+
+    tasksHTML.forEach((task) => {
+        tasks.push(readTaskFromHTML(task));
+    });
+
+    return tasks;
+}
+
+function generateHTMLforTask(task, taskID) {
+    const desc = task.desc;
+    const done = task.done;
+    const due = task.due;
+    
+    return `<div class="input-wrapper">
+                <div class="round">
+                    <input type="checkbox" ${done ? "checked" : ""} id="checkbox${taskID}" />
+                    <label for="checkbox${taskID}"></label>
+                </div>
+                <input type="text" id="todo-input${taskID}" value="${desc}" autocomplete="off" placeholder="Enter a task" class="todo-input">
+                <p>Due date: </p>
+                <input type="date" id="due-date${taskID}" value="${due}">
+            </div>`;
+}
+
+export function loadContent(onProject) {
+    clearContent();
+
+    const projectIndex = stateProjects.json.indexOf(onProject);
+    stateProjects.json[projectIndex].tasks.forEach((task, index) => {
+        const taskID = `${index}`;
+        const item = document.createElement('div');
+        item.classList.add('checklist-item');
+        item.innerHTML = generateHTMLforTask(task, taskID);
+        document.querySelector('#todo-list').appendChild(item);
+    });
+
+    const content = document.querySelector('.content');
+    const h2 = content.querySelector('h2');
+    if (onProject.name === "none") {
+        h2.innerHTML = `All Tasks`;
+    } else {
+        h2.innerHTML = `#${onProject.name}`;
+    }
+}
+
+function clearContent() {
+    document.querySelector('#todo-list').innerHTML = '';
+}
