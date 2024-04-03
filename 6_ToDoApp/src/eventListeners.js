@@ -70,7 +70,7 @@ document.addEventListener('click', function(event) {
         } else {
             stateProjects.json.forEach((project) => {
                 if (project.name === event.target.innerHTML.slice(1)) {
-                    state.currentProject = project;
+                    state.currentProject = project
                 }
             });
         }
