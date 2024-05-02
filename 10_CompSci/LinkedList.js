@@ -47,7 +47,17 @@ class LinkedList {
             currentNode = currentNode.next
         }
     }
-    
+
+    indexOf(value) {
+        let currentNode = this.headNode
+        let index = 0
+        while(currentNode.value !== value) {
+           count++ 
+           currentNode = currentNode.next
+        }
+        return index
+    }
+
     pop() {
         let currentNode = this.headNode
         while(currentNode !== null) {
@@ -163,12 +173,4 @@ class Node {
     }
 }
 
-const string = "string"
-
-const list = new LinkedList()
-list.append(string)
-list.append('shit')
-list.prepend('three')
-
-list.removeAt(1)
-console.log(list.toStringg())
+module.exports = LinkedList
