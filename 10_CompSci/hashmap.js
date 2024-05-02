@@ -16,6 +16,32 @@ class HashMap {
     }
 
     get(key) {
+        if (this.getNode(key) === null) return null
+        const { node } = this.getNode(key)
+        return node.value
+    }
+
+     has(key) {
+        if (this.getNode(key) === null) return false
+        return true
+     }
+
+     remove(key) {
+        if (this.getNode(key) === null) return false
+        const { index, ll, node} = this.getNode(key)
+        if (ll.size <= 1) {
+            this.buckets[index] = undefined
+        } else {
+            ll.removeAt(ll.indexOf(node))
+        }
+        return true
+     }
+    
+    set arraySize(value) {
+       this.arraySize = value 
+    }
+    
+    getNode(key) {
         const hashcode = this.hash(key)
         const index = hashcode % 16
 
@@ -27,55 +53,12 @@ class HashMap {
             const ll = this.buckets[index]
             for (let i = 0; i < ll.size(); i++) {
                 const node = ll.at(i).value
-                if (node.key === hashcode) return node.value
+                if (node.key === hashcode) return {index, ll, node}
             }
         } else {
             console.warn('the bucket has not been created')
         }
         return null
-    }
-     has(key) { 
-        const hashcode = this.hash(key)
-        const index = hashcode % 16
-        
-        if (index < 0 || index >= this.buckets.length) {
-            throw new Error("Trying to access index out of bound")
-        }
-
-        if (this.buckets[index] !== undefined) {
-            const ll = this.buckets[index]
-            for (let i = 0; i < ll.size(); i++) {
-                const node = ll.at(i).value
-                if (node.key === hashcode) return true
-            }
-        } else {
-            console.warn('the bucket has not been created')
-        }
-        return false
-     }
-
-     remove(key) {
-        const hashcode = this.hash(key)
-        const index = hashcode % 16
-
-        if (index < 0 || index >= this.buckets.length) {
-            throw new Error("Trying to access index out of bound")
-        }
-
-        if (this.buckets[index] !== undefined) {
-            const ll = this.buckets[index]
-            for (let i = 0; i < ll.size(); i++) {
-                const node = ll.at(i).value
-                if (node.key === hashcode) return true
-            }
-        } else {
-            console.warn('the bucket has not been created')
-        }
-        return false
-     }
-    
-    set arraySize(value) {
-       this.arraySize = value 
     }
     
     hash(key) {
@@ -168,6 +151,16 @@ class LinkedList {
             count++
             currentNode = currentNode.next
         }
+    }
+
+    indexOf(value) {
+        let currentNode = this.headNode
+        let index = 0
+        while(currentNode.value !== value) {
+           count++ 
+           currentNode = currentNode.next
+        }
+        return index
     }
     
     pop() {
@@ -288,4 +281,7 @@ class Node {
 const names = new HashMap()
 names.set("Alan", "Napieralski")
 console.log(names.get("Alan"))
-console.log(names.has("Aan"))
+console.log(names.has("Alan"))
+console.log(names.remove("Alan"))
+console.log(names.get("Alan"))
+console.log(names.has("Alan"))
