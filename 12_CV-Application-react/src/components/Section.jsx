@@ -34,13 +34,13 @@ function Section(props) {
     })
 
     return (
-        <>
-            <h1 className='text-red-500'>{props.name}</h1>
-            <div>
-              {fieldsList} 
+        <div className='w-1200px p-4 border-4 rounded space-y-6 > *'>
+            <h1>{props.name}</h1>
+            <div className='space-y-2 > *'>
+              {fieldsList}
             </div>
             <button onClick={handleSubmit}>Submit</button>
-        </>
+        </div>
     )
 }
 
