@@ -1,15 +1,17 @@
 import './App.css'
-import Section from './components/Section.jsx'
+import GeneralInfo from './components/GeneralInfo.jsx'
+import EduInfo from './components/EduInfo.jsx'
+import PracticalExp from './components/PracticalExp.jsx'
 
 function App() {
-  const fields = [
-    {name: 'First Name', type: 'text'},
-    {name: 'Last Name', type: 'text'}, 
-    {name: 'Email', type: 'email'},
-    {name: 'Phone Number', type: 'tel'}
-  ]
 
-  return <Section name='General Information' fields={fields} />
+  return (
+  <>
+    <GeneralInfo />
+    <EduInfo />
+    <PracticalExp />
+  </>
+  ) 
 }
 
 export default App
