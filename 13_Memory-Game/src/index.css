@@ -52,6 +52,7 @@ table {
 }
 
 :root {
+  height: 100vh;
   background-color: #18191A;
   display: flex;
   flex-direction: column;
