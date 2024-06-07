@@ -9,7 +9,7 @@ export default function Restart({setResult, setScore}) {
     }
 
     return (
-        <button onClick={handleClick} type="button" className="my-6 w-20 h-20 bg-red-400 rounded">
+        <button onClick={handleClick} type="button" className="my-6 w-20 h-20 bg-red-400 rounded font-sans text-white font-bold">
             Restart
         </button>
     )
