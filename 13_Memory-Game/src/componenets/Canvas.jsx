@@ -1,25 +1,28 @@
 import {useState, useEffect} from 'react'
 
-export default function Canvas() {
-
+export default function Canvas({score, result, setResult}) {
     const assets = extractAssets() 
-
-    const [score, setScore] = useState(0)
-
     const [clickedMell, setClickedMell] = useState(assets)
 
-    const [win, setWin] = useState(false)
-    const [defeat, setDefeat] = useState(false)
-
+    useEffect(() => {
+        setClickedMell(assets)
+    }, [result.win, result.defeat])
+    
     function handleClick(gif) {
         return () => {
             const foundGif = clickedMell.find( mell => mell.id === gif.id)
             if (checkWin(clickedMell)) {
-                setWin(true) 
+                setResult({
+                    win: true,
+                    defeat: false
+                }) 
                 return
             }
             if (foundGif.picked) {
-                setDefeat(true)
+                setResult({
+                    win: false,
+                    defeat: true
+                })
                 return
             }
 
@@ -28,19 +31,19 @@ export default function Canvas() {
                     current.id === gif.id ? { ...current, picked: true } : current 
                ) 
             )) 
-            setScore(prevScore => prevScore + 1)
+            score.setScore(prevScore => prevScore + 1)
         }
     }
 
     function getFeedback() {
-        if (win) return 'You won!!!'
-        if (defeat) return 'You lost :o'
+        if (result.win) return 'You won!!!'
+        if (result.defeat) return 'You lost :o'
 
-        return `Your current score is ${score}` 
+        return `Your current score is ${score.score}` 
     }
 
     return (
-        <>
+        <div className='relative'>
             <h1 className='text-white text-3xl self-center'>{getFeedback()}</h1>
             <div className='w-[calc(5*224px+4*16px)] grid grid-cols-5 grid-rows-3 gap-4 overflow-hidden' >
                 {assets.map( gif => (
@@ -49,7 +52,7 @@ export default function Canvas() {
                     </button>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 
