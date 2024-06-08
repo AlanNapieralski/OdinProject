@@ -1,11 +1,15 @@
 import {useState, useEffect} from 'react'
 import Skeleton from '@mui/material/Skeleton'
+import useSound from 'use-sound'
+import './Canvas.css'
+import amamam from '../soundEffects/amamam.mp3'
 
 export default function Canvas({score, result, setResult}) {
     const assets = extractAssets() 
     const [clickedMell, setClickedMell] = useState(assets)
     const [allLoaded, setLoaded] = useState(Array(15).fill(false))
     const [ready, setReady] = useState(false)
+    const [playSound] = useSound(amamam)
 
     useEffect(() => {
         setClickedMell(assets)
@@ -42,11 +46,12 @@ export default function Canvas({score, result, setResult}) {
                ) 
             )) 
             score.setScore(prevScore => prevScore + 1)
+          
+            if (gif.id === 4) playSound()
         }
     }
 
     const handleImageLoad = (id) => () => {
-        console.log(`image with id ${id} loaded`)
         setLoaded(prev => {
             const newArr = [...prev]
             newArr[id - 1] = true
@@ -54,13 +59,24 @@ export default function Canvas({score, result, setResult}) {
         }) 
     }
 
+    const [isAnimating, setAnimating] = useState(false)
+
+    const handleAnimation = () => {
+        setAnimating(true)
+        setTimeout(() => setAnimating(false), 500)
+    }
+
+    useEffect(() => {
+        handleAnimation()
+    }, [score])
+
     return (
         <div className='relative'>
             <h1 className='text-white text-3xl self-center'>{`Your current score is ${score.score}`}</h1>
             <div className='w-[calc(5*224px+4*16px)] grid grid-cols-5 grid-rows-3 gap-4 overflow-hidden' >
                 {assets.map( gif => (
                     <button type='button' key={gif.id} onClick={handleClick(gif)} className={`w-56 h-56 hover:opacity-50 > * ${ready ? '' : 'pointer-events-none'}`}> 
-                        <img src={gif.url} onLoad={handleImageLoad(gif.id)} className={`h-full w-full object-cover ${allLoaded[gif.id-1] ? 'block' : 'hidden'}`} /> 
+                        <img src={gif.url} onLoad={handleImageLoad(gif.id)} className={`h-full w-full object-cover ${allLoaded[gif.id-1] ? 'block' : 'hidden'} ${isAnimating ? 'animate' : '' }`} /> 
                         {!allLoaded[gif.id-1] ? <Skeleton variant='circular' width={224} height={224} /> : null}
                     </button>
                 ))}
