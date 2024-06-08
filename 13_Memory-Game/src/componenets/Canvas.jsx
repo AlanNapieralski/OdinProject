@@ -4,7 +4,7 @@ import useSound from 'use-sound'
 import './Canvas.css'
 import amamam from '../soundEffects/amamam.mp3'
 
-export default function Canvas({score, result, setResult}) {
+export default function Canvas({score, best, result, setResult}) {
     const assets = extractAssets() 
     const [clickedMell, setClickedMell] = useState(assets)
     const [allLoaded, setLoaded] = useState(Array(15).fill(false))
@@ -20,6 +20,11 @@ export default function Canvas({score, result, setResult}) {
             setReady(true)
         }
     }, [allLoaded])
+
+    useEffect(() => {
+                if (best.best < score.score)
+                    best.setBest(score.score)
+            }, [score])
 
     function handleClick(gif) {
         return () => {
@@ -45,8 +50,11 @@ export default function Canvas({score, result, setResult}) {
                     current.id === gif.id ? { ...current, picked: true } : current 
                ) 
             )) 
-            score.setScore(prevScore => prevScore + 1)
           
+            score.setScore(prev => prev + 1)
+
+            
+
             if (gif.id === 4) playSound()
         }
     }
