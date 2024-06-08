@@ -1,4 +1,4 @@
-export default function Restart({setResult, setScore}) {
+export default function Restart({stop, setResult, setScore}) {
 
     const handleClick = () => {
         setResult({
@@ -6,6 +6,7 @@ export default function Restart({setResult, setScore}) {
             defeat: false
         })
         setScore(0)
+        stop()
     }
 
     return (

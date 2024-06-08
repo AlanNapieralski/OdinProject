@@ -9,9 +9,10 @@ export default function Canvas({score, best, result, setResult}) {
     const [clickedMell, setClickedMell] = useState(assets)
     const [allLoaded, setLoaded] = useState(Array(15).fill(false))
     const [ready, setReady] = useState(false)
-    const [playSound] = useSound(amamam)
+    const [playSound, {stop}] = useSound(amamam)
 
     useEffect(() => {
+        stop()
         setClickedMell(assets)
     }, [result.win, result.defeat])
   
@@ -26,17 +27,18 @@ export default function Canvas({score, best, result, setResult}) {
                     best.setBest(score.score)
             }, [score])
 
+    useEffect(() => {
+        if (checkWin(clickedMell))
+            setResult({
+                win: true,
+                defeat: false
+            })
+    }, [score])
+
     function handleClick(gif) {
         return () => {
-            const foundGif = clickedMell.find( mell => mell.id === gif.id)
+            const foundGif = clickedMell.find( mell => mell.id === gif.id) 
 
-            if (checkWin(clickedMell)) {
-                setResult({
-                    win: true,
-                    defeat: false
-                }) 
-                return
-            }
             if (foundGif.picked) {
                 setResult({
                     win: false,
