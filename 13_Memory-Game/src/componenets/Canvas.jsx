@@ -5,7 +5,7 @@ import './Canvas.css'
 import amamam from '../soundEffects/amamam.mp3'
 
 export default function Canvas({score, best, result, setResult}) {
-    const assets = extractAssets() 
+    const [assets, setAssets] = useState(extractAssets())
     const [clickedMell, setClickedMell] = useState(assets)
     const [allLoaded, setLoaded] = useState(Array(15).fill(false))
     const [ready, setReady] = useState(false)
@@ -23,9 +23,9 @@ export default function Canvas({score, best, result, setResult}) {
     }, [allLoaded])
 
     useEffect(() => {
-                if (best.best < score.score)
-                    best.setBest(score.score)
-            }, [score])
+        if (best.best < score.score)
+            best.setBest(score.score)
+    }, [score])
 
     useEffect(() => {
         if (checkWin(clickedMell))
@@ -33,6 +33,10 @@ export default function Canvas({score, best, result, setResult}) {
                 win: true,
                 defeat: false
             })
+    }, [score])
+
+    useEffect(() => {
+        setAssets(extractAssets())
     }, [score])
 
     function handleClick(gif) {
