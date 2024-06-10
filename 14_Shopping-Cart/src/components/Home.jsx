@@ -14,8 +14,8 @@ const Home = () => {
                 <div className='w-3/4 h-[600px]'>
                     <img src={homeImg} alt='some clothing' className='w-full h-full object-cover rounded-lg drop-shadow-2xl' />
                 </div>
-                {desc.map(p => (
-                    <p className='leading-6 text-center'>{p}</p>
+                {desc.map( (p, index) => (
+                    <p key={index} className='leading-6 text-center'>{p}</p>
                 ))}
                 
             </div>
