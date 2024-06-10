@@ -14,7 +14,7 @@ const Preview = () => {
     }, [])
 
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='h-screen flex justify-center items-center'>
             {product && <ProductCard product={product} />}        
         </div>
     )
