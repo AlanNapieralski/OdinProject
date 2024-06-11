@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const ProductCard = ({product}) => {
 
+    const [height, setHeight] = useState(0)
+    const [isHovered, setHovered] = useState(false)
+
+    useEffect(() => {
+        const textHeight = document.querySelector('.text-reveal').offsetHeight
+        setHeight(textHeight)        
+    }, [])
+
+
     return (
-        <div className="card p-4 flex flex-col justify-center items-center bg-primary border border-yellow-900 rounded-lg drop-shadow-lg group">
-            <img src={product.image} alt={product.title} className="w-48 h-48 overflow-hidden border rounded-sm" />
-            <h2 className={" w-48 text-xl h-20 text-white font-sans text-center overflow-hidden title-reveal-animate group-hover:h-full group-hover:max-h-full"}></h2>
+        <div className="group relative p-4 flex flex-col justify-center items-center bg-primary border rounded-lg drop-shadow-lg" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+            <img src={product.image} alt={product.title} className="z-10 w-48 h-48 overflow-hidden border rounded-sm" />
+            <div style={{transform: isHovered ? `translateY(calc(${height}px - 0.5rem))`: null}} 
+                 className={`text-reveal flex justify-center w-full absolute bottom-4 bg-primary p-2 border rounded-lg transition-[transform] duration-300`}>
+                <h2 className="max-h-[5.5rem] bottom-0 max-w-48 overflow-hidden text-xl text-white font-sans text-center">{product.title}</h2> 
+            </div>
         </div>
     )
 }
