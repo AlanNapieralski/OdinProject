@@ -1,6 +1,7 @@
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import Layout from './pages/Layout.jsx'
+import Preview from './Preview.jsx'
 
 const routes = [
     {
@@ -22,6 +23,10 @@ const routes = [
     {
         path: '/payment',
         element: <></>
+    },
+    {
+        path: '/preview',
+        element: <Preview />
     }
 
 ]
