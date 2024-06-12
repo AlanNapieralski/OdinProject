@@ -31,8 +31,10 @@ const Shop = () => {
 
         return () => {
             refs.current.forEach(ref => {
-                ref.current.removeEventListener('mouseover', mouseOverEvent)
-                ref.current.removeEventListener('mouseleave', mouseLeaveEvent)
+                if (ref.current) {
+                    ref.current.removeEventListener('mouseover', mouseOverEvent)
+                    ref.current.removeEventListener('mouseleave', mouseLeaveEvent)
+                }
             })
         }
     }, [])
