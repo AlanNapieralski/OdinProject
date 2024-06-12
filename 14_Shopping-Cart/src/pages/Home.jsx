@@ -8,7 +8,7 @@ const Home = () => {
          'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam maiores porro neque sapiente. Adipisci earum dolorem provident blanditiis animi? Aspernatur doloribus soluta possimus dolor, qui nam ipsam eveniet harum tenetur.'
     ]
     return (
-        <main className="flex justify-center items-center">
+        <div className="flex justify-center items-center">
             <div className='flex flex-col justify-center items-center max-w-[1280px] *:py-2'>
                 <h1 className="text-4xl">Enhance Your Shopping</h1>
                 <div className='w-3/4 h-[600px]'>
@@ -19,7 +19,7 @@ const Home = () => {
                 ))}
                 
             </div>
-        </main>
+        </div>
     )
 }
 

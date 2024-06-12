@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import ProductCard from './ProductCard'
+import React, { useState, useEffect, useRef } from 'react'
+import ProductCard from '../components/ProductCard'
 import placeholder from '../assets/images/placeholder.jpg'
 
 const Shop = () => {
@@ -15,20 +15,25 @@ const Shop = () => {
            .then(json => setProducts(json))
     }, [])
 
-    const ref = useRef(null)
     const [anyHovered, setAnyHovered] = useState(false)
+    const refs = useRef(Array.from({ length: 9}, () => React.createRef()))
+   
+    const mouseOverEvent = () => setAnyHovered(true)
+    const mouseLeaveEvent = () => setAnyHovered(false)
 
     useEffect(() => {
-        const node = ref.current
-        if (node) {
-            console.log(node)
-            node.addEventListener('mouseenter', () => setAnyHovered(true))
-            node.addEventListener('mouseleave', () => setAnyHovered(false))
-            
-            return () => {
-                node.removeEventListener('mouseenter', () => setAnyHovered(true))
-                node.removeEventListener('mouseleave', () => setAnyHovered(false))
+        refs.current.forEach(ref => {
+            if (ref.current) {
+                ref.current.addEventListener('mouseover', mouseOverEvent)
+                ref.current.addEventListener('mouseleave', mouseLeaveEvent)
             }
+        })
+
+        return () => {
+            refs.current.forEach(ref => {
+                ref.current.removeEventListener('mouseover', mouseOverEvent)
+                ref.current.removeEventListener('mouseleave', mouseLeaveEvent)
+            })
         }
     }, [])
 
@@ -37,7 +42,7 @@ const Shop = () => {
             <h1 className='text-4xl font-sans m-2'>Category: Everything</h1>
             <div className='min-w-[700px] grid grid-cols-3 gap-4'>
                 { products.map( (product, index) => (
-                        <div ref={ref} key={index}>
+                        <div ref={refs.current[index]} key={index}>
                             <ProductCard product={product} anyHovered={anyHovered} />
                         </div>
                     )

@@ -1,14 +1,14 @@
 import Nav from './components/Nav.jsx'
-import Home from './components/Home.jsx'
+import Home from './pages/Home.jsx'
 import Footer from './components/Footer.jsx'
-import Shop from './components/Shop.jsx'
+import Shop from './pages/Shop.jsx'
 
 function App() {
 
   return (
     <>
      <Nav />
-     <Shop />
+     <Home />
      <Footer />
     </>
   )
