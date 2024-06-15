@@ -15,11 +15,13 @@ const Preview = () => {
         fetch("https://fakestoreapi.com/products?limit=1")
            .then(res => res.json())
            .then(json => setProduct(json))
-    }, [])
+    })
+
+    useEffect(() => console.log(product), [product])
 
     return (
         <div className='h-screen flex justify-center items-center'>
-        <ProductPage product={product} /> 
+            <ProductPage product={product} /> 
         </div>
     )
 }
