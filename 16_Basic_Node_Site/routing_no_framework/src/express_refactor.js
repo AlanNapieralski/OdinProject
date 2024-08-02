@@ -1,7 +1,11 @@
 import express from 'express'
 import fs from 'fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function initialisePages() {
   const indexURL = new URL("https://localhost:8000/")
@@ -43,20 +47,25 @@ async function readHTML(path) {
 const app = express()
 const { index, about, contactme, error } = await initialisePages()
 
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
-
 // templating engine
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, 'views'))
+app.set("view engine", "ejs")
+
+const links = [
+  { href: '/', text: 'Home' },
+  { href: 'about', text: 'About' },
+  { href: 'contact-me', text: 'Contact me' },
+]
 
 app.get('/', (req, res) => {
-  res.send(index.html)
+  res.render('main', { message: 'Hello, this is the main page of my website', links: links })
 })
 app.get('/about', (req, res) => {
-  res.render('about', { message: 'Hello, this is the about me page using the express templates' })
+  res.render('main', { message: 'Hello, this is the about me page using the express templates', links: links })
 })
-app.get('/contactme', (req, res) => res.send(contactme.html))
+app.get('/contact-me', (req, res) => {
+  res.render('main', { message: 'Pls contact me lol', links: links })
+})
 app.use((req, res, next) => {
   res.status(404).send(error.html);
 });
