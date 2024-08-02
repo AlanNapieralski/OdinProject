@@ -1,0 +1,42 @@
+body {
+  background-color: #fbfaf9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+button {
+  height: 50px;
+  width: 150px;
+  border: 5px solid #DDD0C8;
+  background-color: #fbfaf9;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+button:hover {
+  background-color: #DDD0C8;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: 5px solid #DDD0C8;
+  background-color: #fbfaf9;
+  border-radius: 10px;
+  margin: 15px;
+  text-align: left;
+}
+
+p {
+  color: #323232;
+  padding-left: 10px;
+  margin: 8px;
+}
+
+.user, .added {
+  color: rgba(0, 0, 0, 0.5);
+}

@@ -1,4 +1,4 @@
-[
+const messages = [
   {
     "text": "Hi there",
     "user": "Amando",
@@ -10,3 +10,5 @@
     "added": "test"
   }
 ]
+
+module.exports = messages

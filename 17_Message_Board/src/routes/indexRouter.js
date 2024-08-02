@@ -1,11 +1,10 @@
 const { Router } = require('express')
-const { parseMessageJSON } = require('../middleware/parseMessageJSON')
+const messages = require('../models/messages.js')
 
 const router = Router()
 
-router.use(parseMessageJSON)
 router.get('/', (req, res) => {
-  res.render('index', { messages: req.messages })
+  res.render('index', { messages: messages })
 })
 
 
