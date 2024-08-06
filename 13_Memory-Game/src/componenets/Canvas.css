@@ -1,0 +1,22 @@
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1);
+    }
+    33% {
+        transform: scale(0.95);
+    }
+    66% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animated-image {
+    transition: transform 0.5s;
+}
+
+.animate {
+    animation: scaleAnimation 0.5s forwards;
+}

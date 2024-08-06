@@ -1,0 +1,54 @@
+import { ArrayExpressionNode, ColumnType, IdentifierNode, ObjectExpressionNode, UnionExpressionNode } from '../../ast';
+import { Adapter } from '../../core';
+export declare class MysqlAdapter extends Adapter {
+    readonly definitions: {
+        Decimal: ColumnType;
+        Geometry: UnionExpressionNode;
+        Json: ColumnType;
+        JsonArray: import("../../ast").DefinitionNode;
+        JsonObject: import("../../ast").DefinitionNode;
+        JsonPrimitive: import("../../ast").DefinitionNode;
+        JsonValue: import("../../ast").DefinitionNode;
+        LineString: ArrayExpressionNode;
+        Point: ObjectExpressionNode;
+        Polygon: ArrayExpressionNode;
+    };
+    readonly scalars: {
+        bigint: IdentifierNode;
+        binary: IdentifierNode;
+        bit: IdentifierNode;
+        blob: IdentifierNode;
+        char: IdentifierNode;
+        date: IdentifierNode;
+        datetime: IdentifierNode;
+        decimal: IdentifierNode;
+        double: IdentifierNode;
+        float: IdentifierNode;
+        geomcollection: ArrayExpressionNode;
+        geometry: IdentifierNode;
+        int: IdentifierNode;
+        json: IdentifierNode;
+        linestring: IdentifierNode;
+        longblob: IdentifierNode;
+        longtext: IdentifierNode;
+        mediumblob: IdentifierNode;
+        mediumint: IdentifierNode;
+        mediumtext: IdentifierNode;
+        multilinestring: ArrayExpressionNode;
+        multipoint: ArrayExpressionNode;
+        multipolygon: ArrayExpressionNode;
+        point: IdentifierNode;
+        polygon: IdentifierNode;
+        set: IdentifierNode;
+        smallint: IdentifierNode;
+        text: IdentifierNode;
+        time: IdentifierNode;
+        timestamp: IdentifierNode;
+        tinyblob: IdentifierNode;
+        tinyint: IdentifierNode;
+        tinytext: IdentifierNode;
+        varbinary: IdentifierNode;
+        varchar: IdentifierNode;
+        year: IdentifierNode;
+    };
+}

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AliasDeclarationNode = void 0;
+const node_type_1 = require("./node-type");
+class AliasDeclarationNode {
+    constructor(name, body) {
+        this.type = node_type_1.NodeType.ALIAS_DECLARATION;
+        this.name = name;
+        this.body = body;
+    }
+}
+exports.AliasDeclarationNode = AliasDeclarationNode;
+//# sourceMappingURL=alias-declaration-node.js.map

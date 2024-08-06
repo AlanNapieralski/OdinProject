@@ -1,0 +1,61 @@
+import { ColumnType, IdentifierNode, ModuleReferenceNode, ObjectExpressionNode } from '../../ast';
+import { Adapter } from '../../core';
+export declare class PostgresAdapter extends Adapter {
+    readonly defaultScalar: IdentifierNode;
+    readonly defaultSchema = "public";
+    readonly definitions: {
+        Circle: ObjectExpressionNode;
+        Int8: ColumnType;
+        Interval: ColumnType;
+        Json: import("../../ast").DefinitionNode;
+        JsonArray: import("../../ast").DefinitionNode;
+        JsonObject: import("../../ast").DefinitionNode;
+        JsonPrimitive: import("../../ast").DefinitionNode;
+        JsonValue: import("../../ast").DefinitionNode;
+        Numeric: ColumnType;
+        Point: ObjectExpressionNode;
+        Timestamp: ColumnType;
+    };
+    readonly imports: {
+        IPostgresInterval: ModuleReferenceNode;
+    };
+    readonly scalars: {
+        bit: IdentifierNode;
+        bool: IdentifierNode;
+        box: IdentifierNode;
+        bpchar: IdentifierNode;
+        bytea: IdentifierNode;
+        cidr: IdentifierNode;
+        circle: IdentifierNode;
+        date: IdentifierNode;
+        float4: IdentifierNode;
+        float8: IdentifierNode;
+        inet: IdentifierNode;
+        int2: IdentifierNode;
+        int4: IdentifierNode;
+        int8: IdentifierNode;
+        interval: IdentifierNode;
+        json: IdentifierNode;
+        jsonb: IdentifierNode;
+        line: IdentifierNode;
+        lseg: IdentifierNode;
+        macaddr: IdentifierNode;
+        money: IdentifierNode;
+        numeric: IdentifierNode;
+        oid: IdentifierNode;
+        path: IdentifierNode;
+        point: IdentifierNode;
+        polygon: IdentifierNode;
+        text: IdentifierNode;
+        time: IdentifierNode;
+        timestamp: IdentifierNode;
+        timestamptz: IdentifierNode;
+        tsquery: IdentifierNode;
+        tsvector: IdentifierNode;
+        txid_snapshot: IdentifierNode;
+        uuid: IdentifierNode;
+        varbit: IdentifierNode;
+        varchar: IdentifierNode;
+        xml: IdentifierNode;
+    };
+}
