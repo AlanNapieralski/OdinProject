@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express'
 import { postLogin, postSignin } from './controllers/authenticationController.js'
 import path from 'path'
 import { db } from './db/database.js'
+import query from './db/queries.js'
 
 // types
 
@@ -25,24 +26,29 @@ app.use(express.static("public"))
 // auth
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }))
 app.use(passport.session())
-app.use(express.urlencoded({ extended: true }));
-
+app.use(express.urlencoded({ extended: false }));
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
+    console.log('just checking: ' + username)
     try {
-      const user = await db
-        .selectFrom('user')
-        .where('user.username', '=', username)
-        .selectAll()
-        .executeTakeFirstOrThrow()
+      console.log('Fetching the user info from the db')
 
+      const user = await query.getUserByUsername(username)
+      if (user === undefined) {
+        console.error('the user with this username does not exist in the database')
+        return done(null, false, { message: "No result from the query" })
+      }
+
+      console.log('Validating the user username')
       if (!user) {
         return done(null, false, { message: "Incorrect username" })
       }
+      console.log('Validating the user password')
       if (user.password !== password) {
         return done(null, false, { message: "Incorrect password" })
       }
+      console.log('all good')
       return done(null, user)
 
     } catch (err) {
@@ -51,49 +57,73 @@ passport.use(
   })
 )
 
-passport.serializeUser((user, done) => {
-  done(null, user.id)
+passport.serializeUser(function(user, done) {
+  console.log('serializing the user')
+  return done(null, user.id)
 })
 
 passport.deserializeUser(async (id, done) => {
+  console.log('deserializing the user')
   if (typeof id !== 'number') {
     return done(new Error('Invalid ID type'))
   }
-  const user_id = id as number
 
   try {
     const user = await db
       .selectFrom('user')
-      .where('user.id', '=', user_id)
+      .where('user.id', '=', id)
       .selectAll()
-      .executeTakeFirstOrThrow()
+      .executeTakeFirst()
 
-    done(null, user)
+    if (user === undefined) {
+      console.error('the user with this id does not exist in the database')
+      return done(null, false)
+    }
+    return done(null, user)
+
   } catch (err) {
-    done(err)
+    console.error("Error: Failed deserialisation of the user")
+    return done(err)
   }
 })
 
 // routing
 app.get('/', (req, res) => {
-  if (!req.user)
-    res.redirect('sign-in')
+  if (!req.user) {
+    return res.redirect('sign-in')
+  }
 
   res.render("dashboard", { user: req.user })
 })
 app.get('/dashboard', (req, res) => {
-  if (req.user)
-    res.render("dashboard", { user: req.user })
+  if (req.user) {
+    return res.render("dashboard", { user: req.user })
+  }
 
   res.redirect("/log-in")
 })
+app.post("/dashboard", (req, res) => {
+  if (req.body.action === 'request_membership') {
+    if (req.user) {
+      req.user.ismember = true
+      query.changeMembershipStatus(req.user.id, true)
+      console.log('User have become a member')
+    }
+    return res.render('dashboard', { user: req.user })
+  }
+  return res.redirect('/dashboard')
+})
 
 app.get('/log-in', (req, res) => {
+  if (req.user)
+    res.redirect('/dashboard')
   res.render('log-in', {})
 })
-app.post('/log-in', postLogin)
+app.post('/log-in', passport.authenticate('local', { failureRedirect: '/log-in', successRedirect: '/dashboard' }))
 
 app.get('/sign-in', (req, res) => {
+  if (req.user)
+    res.redirect('/dashboard')
   res.render('sign-in', {})
 })
 app.post('/sign-in', postSignin)

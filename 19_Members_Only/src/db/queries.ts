@@ -14,7 +14,27 @@ async function deleteUser(id: number) {
     .executeTakeFirstOrThrow()
 }
 
+async function getUserByUsername(username: string) {
+  return await db
+    .selectFrom('user')
+    .where('username', '=', username)
+    .selectAll()
+    .executeTakeFirst()
+}
+
+async function changeMembershipStatus(id: number, status: boolean) {
+  return await db
+    .updateTable('user')
+    .set({
+      ismember: status,
+    })
+    .where('id', '=', id)
+    .execute()
+}
+
 export default {
   createUser,
-  deleteUser
+  deleteUser,
+  getUserByUsername,
+  changeMembershipStatus
 } 

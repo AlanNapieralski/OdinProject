@@ -25,8 +25,30 @@ function deleteUser(id) {
             .executeTakeFirstOrThrow();
     });
 }
+function getUserByUsername(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield database_js_1.db
+            .selectFrom('user')
+            .where('username', '=', username)
+            .selectAll()
+            .executeTakeFirst();
+    });
+}
+function changeMembershipStatus(id, status) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield database_js_1.db
+            .updateTable('user')
+            .set({
+            ismember: status,
+        })
+            .where('id', '=', id)
+            .execute();
+    });
+}
 exports.default = {
     createUser,
-    deleteUser
+    deleteUser,
+    getUserByUsername,
+    changeMembershipStatus
 };
 //# sourceMappingURL=queries.js.map

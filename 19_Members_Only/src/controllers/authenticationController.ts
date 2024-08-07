@@ -1,13 +1,10 @@
 import { Request, Response, NextFunction } from "express"
 import query from '../db/queries.js'
 import { UserUpdate, User, NewUser } from '../types/types.js'
-import passport from 'passport'
+import passport, { authenticate } from "passport"
 
 export const postLogin = (req: Request, res: Response, next: NextFunction) => {
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/"
-  })
+  login()
 }
 
 export const postSignin = async (req: Request, res: Response, next: NextFunction) => {
@@ -19,11 +16,16 @@ export const postSignin = async (req: Request, res: Response, next: NextFunction
       password: req.body.password,
       ismember: false
     } as NewUser)
-    res.redirect('/dashboard')
+    login()
 
   } catch (err) {
     console.error('Error: User creation have failed')
     return next(err)
   }
+
+}
+
+function login() {
+  passport.authenticate('local', { failureRedirect: '/log-in', successRedirect: '/dashboard' })
 }
 

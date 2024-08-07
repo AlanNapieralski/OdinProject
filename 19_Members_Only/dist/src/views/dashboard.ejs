@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title></title>
-          <link href="css/style.css" rel="stylesheet">
-          </head>
-          <body>
-            <h1>Dashboard for the user</h1>
-          </body>
-        </html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Dashboard for the user. 
+      <% if (user.ismember) { %> 
+        You are a member!!! 
+      <% } else { %> 
+        You don't have a membership :C
+      <% } %>
+    </h1>
+    <% if (!user.ismember) { %> 
+    <form action="/dashboard" method="POST">
+      <input type="hidden" name="action" value="request_membership">
+      <button type="submit">Get your membership now!</button> 
+    </form>
+    <% } %>
+    <h2>Username: <%= user.username %></h2>
+  </body>
+</html>
+

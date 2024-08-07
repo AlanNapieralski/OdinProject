@@ -16,10 +16,7 @@ exports.postSignin = exports.postLogin = void 0;
 const queries_js_1 = __importDefault(require("../db/queries.js"));
 const passport_1 = __importDefault(require("passport"));
 const postLogin = (req, res, next) => {
-    passport_1.default.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/"
-    });
+    login();
 };
 exports.postLogin = postLogin;
 const postSignin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -31,7 +28,7 @@ const postSignin = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             password: req.body.password,
             ismember: false
         });
-        res.redirect('/dashboard');
+        login();
     }
     catch (err) {
         console.error('Error: User creation have failed');
@@ -39,4 +36,7 @@ const postSignin = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.postSignin = postSignin;
+function login() {
+    passport_1.default.authenticate('local', { failureRedirect: '/log-in', successRedirect: '/dashboard' });
+}
 //# sourceMappingURL=authenticationController.js.map
