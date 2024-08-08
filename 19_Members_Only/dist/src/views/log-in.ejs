@@ -7,6 +7,7 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
+    <%- include("partials/validationErrors.ejs") %>
     <form action="/log-in" method="post">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
@@ -16,5 +17,6 @@
 
         <input type="submit" value="Log in">
     </form>
+    <p>Don't have an account? <a href="/sign-in">Register here</a></p>
   </body>
 </html>

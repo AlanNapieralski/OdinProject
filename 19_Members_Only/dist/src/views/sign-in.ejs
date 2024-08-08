@@ -7,25 +7,26 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-<form action="/sign-in" method="post">
-    <label for="first-name">First Name:</label><br>
-    <input type="text" id="first-name" name="first_name" required><br><br>
-    
-    <label for="last-name">Last Name:</label><br>
-    <input type="text" id="last-name" name="last_name" required><br><br>
-    
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br><br>
-    
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br><br>
-    
-    <label for="confirm_password">Password:</label><br>
-    <input type="password" id="password" name="confirm_password" required><br><br>
+    <%- include("partials/validationErrors.ejs") %>
 
-    <input type="submit" value="Sign In">
-</form>
+    <form action="/sign-in" method="post">
+        <label for="first-name">First Name:</label><br>
+        <input type="text" id="first-name" name="first_name" required><br><br>
+        
+        <label for="last-name">Last Name:</label><br>
+        <input type="text" id="last-name" name="last_name" required><br><br>
+        
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="confirm_password">Password:</label><br>
+        <input type="password" id="password" name="confirm_password" required><br><br>
 
-<p>Don't have an account? <a href="/register">Register here</a></p>
+        <input type="submit" value="Sign In">
+    </form>
+
   </body>
 </html>

@@ -1,0 +1,17 @@
+<% if (locals.errors || locals.authError) { %>
+  <% 
+    const anyErrors = [
+      ...(locals.authError ? [locals.authError] : []),
+      ...(locals.errors || [])
+    ]
+
+    console.log(anyErrors)
+  %>
+
+  <ul>
+    <% anyErrors.forEach(function(error) { %>
+      <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+<% } %>
+
