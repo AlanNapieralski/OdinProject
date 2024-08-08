@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express'
 import { postLogin, signInPost } from './controllers/authenticationController.js'
 import path from 'path'
 import query from './db/queries.js'
-
+import bcrypt from 'bcryptjs'
 //auth
 import session from 'express-session'
 import passport from 'passport'

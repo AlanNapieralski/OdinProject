@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy, VerifyFunction } from 'passport-local'
 import query from '../db/queries.js'
 import { Request, Response, NextFunction } from 'express'
 import { db } from '../db/database.js'
-
+import bcrypt from 'bcryptjs'
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -17,7 +17,9 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" })
       }
-      if (user.password !== password) {
+
+      const match = await bcrypt.compare(password, user.password)
+      if (!match) {
         return done(null, false, { message: "Incorrect password" })
       }
       return done(null, user)

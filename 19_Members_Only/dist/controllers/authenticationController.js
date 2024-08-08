@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signInPost = exports.postLogin = void 0;
 const queries_js_1 = __importDefault(require("../db/queries.js"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 // auth
 const authentication_js_1 = require("./authentication.js");
 // validation
@@ -48,16 +49,27 @@ exports.signInPost = [
                 errors: errors.array(),
             });
         }
+        let password;
+        try {
+            const hashedPassword = yield hashPassword(req.body.password);
+            password = hashedPassword;
+        }
+        catch (err) {
+            return res.status(400).render("sign-in", {
+                errors: [{ msg: 'Password hashing has been unsuccessful' }]
+            });
+        }
         const { first_name, last_name, username } = req.body;
+        console.log('LastPassword', password);
         try {
             yield queries_js_1.default.createUser({
                 first_name: first_name,
                 last_name: last_name,
                 username: username,
-                password: req.body.password,
+                password: password,
                 ismember: false
             });
-            return (0, authentication_js_1.login)('sign-in', req, res, next);
+            return (0, authentication_js_1.login)('log-in', req, res, next);
         }
         catch (err) {
             console.error('Error: User creation have failed');
@@ -65,4 +77,16 @@ exports.signInPost = [
         }
     })
 ];
+function hashPassword(password) {
+    return new Promise((resolve, reject) => {
+        bcryptjs_1.default.hash(password, 10, (err, hashedPassword) => __awaiter(this, void 0, void 0, function* () {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(hashedPassword);
+            }
+        }));
+    });
+}
 //# sourceMappingURL=authenticationController.js.map

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import query from '../db/queries.js'
 import { UserUpdate, User, NewUser } from '../types/types.js'
+import bcrypt from 'bcryptjs'
 // auth
 import { login } from "./authentication.js"
 // validation
@@ -42,18 +43,27 @@ export const signInPost = [
       })
     }
 
-    const { first_name, last_name, username } = req.body
+    let password: string
+    try {
+      const hashedPassword = await hashPassword(req.body.password)
+      password = hashedPassword
+    } catch (err) {
+      return res.status(400).render("sign-in", {
+        errors: [{ msg: 'Password hashing has been unsuccessful' }]
+      })
+    }
 
+    const { first_name, last_name, username } = req.body
     try {
       await query.createUser({
         first_name: first_name,
         last_name: last_name,
         username: username,
-        password: req.body.password,
+        password: password,
         ismember: false
       } as NewUser)
 
-      return login('sign-in', req, res, next)
+      return login('log-in', req, res, next)
 
     } catch (err) {
       console.error('Error: User creation have failed')
@@ -61,3 +71,15 @@ export const signInPost = [
     }
   }
 ]
+
+function hashPassword(password: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, 10, async (err, hashedPassword) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(hashedPassword);
+      }
+    });
+  });
+}
