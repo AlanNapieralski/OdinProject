@@ -60,7 +60,6 @@ exports.signInPost = [
             });
         }
         const { first_name, last_name, username } = req.body;
-        console.log('LastPassword', password);
         try {
             yield queries_js_1.default.createUser({
                 first_name: first_name,
