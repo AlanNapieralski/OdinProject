@@ -10,11 +10,11 @@ I can confidently say that my code is way cleaner, safer and maintainable, thank
 <!-- What I've Learned -->
 ### What I've Learnt
 The project was a big first step into my full-stack career. It has taught, refreshed and advanced my knowledge of languages, tools, and frameworks such as:
-- JavaScript
+- JavaScript ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 - Advanced HTML & CSS
 - React
 - Databases with focus on SQL and then MongoDB
-- NodeJS (Backend):
+- NodeJS (Backend) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white):
   - ExpressJS
   - MVC patterns
   - RESTful API and routing
@@ -22,6 +22,9 @@ The project was a big first step into my full-stack career. It has taught, refre
   - Authentication (cooking/JWT)
   - API building
   - Deployment Practices
+ 
+  - 
+
 
 <!-- LICENSE -->
 ## License
