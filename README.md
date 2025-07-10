@@ -9,45 +9,20 @@ I can confidently say that my code is way cleaner, safer and maintainable, thank
 
 <!-- What I've Learned -->
 ### What I've Learnt
-
 The project was a big first step into my full-stack career. It has taught, refreshed and advanced my knowledge of languages, tools, and frameworks such as:
-
-- <div align="center">
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript" />
-  </div>
-
-- Advanced  
-  <div align="center">
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-      <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" alt="HTML5" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-      <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white" alt="CSS3" />
-    </a>
-  </div>
-
-- <div align="center">
-    <img src="https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB" alt="React" />
-  </div>
-
-- Databases with focus on SQL and MongoDB  
-  <div align="center">
-    <img src="https://img.shields.io/badge/SQL-336791?style=flat&logo=postgresql&logoColor=white" alt="SQL" />
-    <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white" alt="MongoDB" />
-  </div>
-
-- NodeJS (Backend)  
-  <div align="center">
-    <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js" />
-    <img src="https://img.shields.io/badge/express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
-  </div>
-
-  - MVC patterns  
-  - RESTful API and routing  
-  - PostgreSQL integration  
-  - Authentication (cookies/JWT)  
-  - API building  
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+- Advanced [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)] & ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+- ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+- Databases with focus on SQL MongoDB ![SQL](https://img.shields.io/badge/SQL-336791?style=flat&logo=postgresql&logoColor=white) and then ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+- NodeJS (Backend) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white):
+  - ![Express.js](https://img.shields.io/badge/express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+  - MVC patterns
+  - RESTful API and routing
+  - PostgreSQL integration
+  - Authentication (cooking/JWT)
+  - API building
   - Deployment Practices
+  make these icons centred
 
     
 <!-- LICENSE -->
