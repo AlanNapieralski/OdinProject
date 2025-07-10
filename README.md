@@ -1,5 +1,5 @@
 # OdinProject
-Project of many sub-projects that helped me bulletproof and complete my Full-Stack Web Dev skills. 
+Project of many sub-projects that helped me bulletproof and complete my Full-Stack Web Dev skill set. 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
